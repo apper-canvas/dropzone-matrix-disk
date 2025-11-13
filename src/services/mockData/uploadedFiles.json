@@ -1,0 +1,22 @@
+[
+  {
+    "Id": 1,
+    "name": "sample-document.pdf",
+    "size": 245760,
+    "type": "application/pdf",
+    "status": "completed",
+    "progress": 100,
+    "uploadedAt": "2024-01-15T10:30:00.000Z",
+    "preview": null
+  },
+  {
+    "Id": 2,
+    "name": "vacation-photo.jpg",
+    "size": 1024000,
+    "type": "image/jpeg", 
+    "status": "completed",
+    "progress": 100,
+    "uploadedAt": "2024-01-15T11:15:00.000Z",
+    "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+  }
+]

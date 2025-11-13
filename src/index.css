@@ -1,0 +1,93 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+@import 'react-toastify/dist/ReactToastify.css';
+
+/* Custom toast styles */
+.Toastify__toast {
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding: 16px;
+  margin-bottom: 8px;
+}
+
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: white;
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  color: white;
+}
+
+.Toastify__toast--info {
+  background: linear-gradient(135deg, #3B82F6, #2563EB);
+  color: white;
+}
+
+.Toastify__toast--warning {
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: white;
+}
+
+.Toastify__progress-bar {
+  height: 3px;
+  border-radius: 3px;
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Upload progress animation */
+@keyframes progressFill {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--progress-width);
+  }
+}
+
+.progress-fill {
+  animation: progressFill 0.3s ease-out;
+}
+
+/* File card hover effects */
+.file-card {
+  transition: all 0.2s ease-out;
+}
+
+.file-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* Drop zone animations */
+.drop-zone {
+  transition: all 0.2s ease-out;
+}
+
+.drop-zone.drag-over {
+  transform: scale(1.02);
+  border-color: #3B82F6;
+  border-style: solid;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(59, 130, 246, 0.02));
+}
