@@ -2,7 +2,7 @@ import React from "react";
 import { cn } from "@/utils/cn";
 import ApperIcon from "@/components/ApperIcon";
 import Button from "@/components/atoms/Button";
-
+import LogoutButton from "@/components/molecules/LogoutButton";
 const Header = ({ 
   onClearAll,
   hasFiles = false,
@@ -27,7 +27,7 @@ const Header = ({
           </div>
           
           {/* Actions */}
-          <div className="flex items-center space-x-4">
+<div className="flex items-center space-x-4">
             {hasFiles && (
               <Button
                 variant="outline"
@@ -38,6 +38,8 @@ const Header = ({
                 Clear All
               </Button>
             )}
+            
+            <LogoutButton />
             
             <Button
               variant="ghost"

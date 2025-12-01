@@ -8,16 +8,15 @@ const UploadStats = ({
   className,
   ...props 
 }) => {
-  const totalFiles = files.length;
+const totalFiles = files.length;
   const completedFiles = files.filter(f => f.status === "completed").length;
   const uploadingFiles = files.filter(f => f.status === "uploading").length;
   const errorFiles = files.filter(f => f.status === "error").length;
   
-  const totalSize = files.reduce((acc, file) => acc + file.size, 0);
+  const totalSize = files.reduce((acc, file) => acc + (file.size || file.size_c || 0), 0);
   const completedSize = files
     .filter(f => f.status === "completed")
-    .reduce((acc, file) => acc + file.size, 0);
-  
+    .reduce((acc, file) => acc + (file.size || file.size_c || 0), 0);
   const stats = [
     {
       label: "Total Files",

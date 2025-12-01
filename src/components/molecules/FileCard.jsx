@@ -77,10 +77,10 @@ const FileCard = ({
                 )} 
               />
               {!isUploading && (
-                <Button
+<Button
                   variant="ghost"
                   size="sm"
-                  onClick={() => onRemove(file.id)}
+                  onClick={() => onRemove(file.id || file.Id)}
                   icon="X"
                   className="h-8 w-8 p-0 hover:bg-red-50 hover:text-error"
                 />

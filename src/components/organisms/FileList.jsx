@@ -46,8 +46,8 @@ const FileList = ({
       
       <div className="max-h-96 overflow-y-auto pr-2 space-y-3">
         {files.map((file) => (
-          <FileCard
-            key={file.id}
+<FileCard
+            key={file.id || file.Id}
             file={file}
             onRemove={onRemoveFile}
           />

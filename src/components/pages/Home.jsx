@@ -8,12 +8,14 @@ import Loading from "@/components/ui/Loading";
 import ErrorView from "@/components/ui/ErrorView";
 import uploadService from "@/services/api/uploadService";
 import { generateFileId } from "@/utils/fileUtils";
+import ApperFileFieldComponent from "@/components/atoms/FileUploader";
 
 const Home = () => {
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [config, setConfig] = useState(null);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
 
   // Load initial data
   useEffect(() => {
@@ -40,7 +42,7 @@ const Home = () => {
     }
   };
 
-  const handleFilesSelected = async (selectedFiles, errors) => {
+const handleFilesSelected = async (selectedFiles, errors) => {
     // Show validation errors
     errors.forEach(error => {
       toast.error(error);
@@ -58,7 +60,7 @@ const Home = () => {
       progress: 0,
       uploadedAt: null,
       preview: null,
-      file: file // Store original file for upload
+      file: file
     }));
 
     setFiles(prev => [...prev, ...newFiles]);
@@ -66,7 +68,7 @@ const Home = () => {
     // Start uploading files
     for (const fileData of newFiles) {
       try {
-        await uploadService.uploadFile(fileData.file, (updatedFile) => {
+        const uploadedFile = await uploadService.uploadFile(fileData.file, (updatedFile) => {
           setFiles(prev => prev.map(f => 
             f.id === fileData.id ? { ...f, ...updatedFile, id: fileData.id } : f
           ));
@@ -84,7 +86,7 @@ const Home = () => {
     }
   };
 
-  const handleRemoveFile = async (fileId) => {
+const handleRemoveFile = async (fileId) => {
     const file = files.find(f => f.id === fileId);
     if (!file) return;
 
@@ -97,13 +99,14 @@ const Home = () => {
     try {
       setFiles(prev => prev.filter(f => f.id !== fileId));
       
-      // If file was completed, remove from service
-      if (file.Id) {
-        await uploadService.remove(file.Id);
+      // If file was completed and has database ID, remove from service
+      if (file.id && typeof file.id === 'number') {
+        await uploadService.remove(file.id);
       }
       
       toast.success("File removed successfully");
     } catch (error) {
+      console.error("Error removing file:", error);
       toast.error("Failed to remove file");
     }
   };
@@ -117,6 +120,7 @@ const Home = () => {
       setFiles([]);
       toast.success("All files cleared");
     } catch (error) {
+      console.error("Error clearing files:", error);
       toast.error("Failed to clear files");
     }
   };
@@ -150,7 +154,7 @@ const Home = () => {
           )}
           
           {/* Drop Zone */}
-          <div className="max-w-2xl mx-auto">
+<div className="max-w-2xl mx-auto">
             <DropZone
               onFilesSelected={handleFilesSelected}
               maxFileSize={config?.maxFileSize}
@@ -158,7 +162,26 @@ const Home = () => {
               maxFiles={config?.maxFiles}
             />
           </div>
-          
+
+          {/* ApperFileFieldComponent for Files type upload */}
+          <div className="max-w-2xl mx-auto mt-8">
+            <div className="bg-white rounded-lg border border-gray-200 p-6">
+              <h3 className="text-lg font-semibold mb-4">Upload Files with Database Integration</h3>
+              <ApperFileFieldComponent
+                elementId="file-upload-preview"
+                config={{
+                  fieldKey: 'preview_c',
+                  fieldName: 'preview_c',
+                  tableName: 'uploaded_file_c',
+                  apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+                  apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY,
+                  existingFiles: uploadedFiles,
+                  fileCount: uploadedFiles.length
+                }}
+              />
+            </div>
+          </div>
+
           {/* File List */}
           <div className="max-w-4xl mx-auto">
             <FileList
